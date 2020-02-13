@@ -20,3 +20,16 @@ The frameworks that is used to built this project.
 * [JQuery](https://jquery.com)
 * [Firebase](https://firebase.google.com/)
 
+### Screens
+
+### 1. Game of Thrones Books List Page
+
+![Game of Thrones Books List Page](https://github.com/aruncdm/got-portal/blob/master/screenshots/Books-List-Page.png?raw=true)
+
+### 2. Book Details Page
+
+![Book Details Page](https://github.com/aruncdm/got-portal/blob/master/screenshots/Book-Details-Page.png?raw=true)
+
+### 3. Saved Reviews From Firebase
+
+![Saved Reviews From Firebase](https://github.com/aruncdm/got-portal/blob/master/screenshots/Saved-Reviews-from-FirebaseDB.png?raw=true)
