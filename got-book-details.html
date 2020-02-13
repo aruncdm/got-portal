@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="book-details">
+            <h1 class="book-title text-center"></h1>
+            <div class="col-lg-12">
+              <div class="col-lg-6 book-info">
+                <h3>No of Pages: <span class="pageno"></span></h3>
+                <h3>Publisher: <span class="publisher"></span></h3>
+                <h3>Country: <span class="country"></span></h3>
+                <h3>Media Type: <span class="media"></span></h3>
+                <h3>Released: <span class="released"></span></h3>
+                <h3>Total Characters: <span class="total-char"></span></h3>
+              </div>
+              <div class="col-lg-6 review-section">
+                <div class="review-box">
+                <textarea name="" id="doReview" cols="50" rows="5">
+
+                </textarea>
+                </div>
+                <div class="add-review-btn">
+                  <button id="book-review" class="btn-primary">Add Review</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 show-reveiw" style="margin-top: 40px;">
+          <h1>Reviews</h1>
+          <div id="comment"></div>
+
+        </div>
+
+      </div>
+
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+
+<script defer src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/book-details.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyD33RQFB1van2FLbyrPlXLOG8ghG_C2n5A",
+    authDomain: "got-portal.firebaseapp.com",
+    databaseURL: "https://got-portal.firebaseio.com",
+    projectId: "got-portal",
+    storageBucket: "got-portal.appspot.com",
+    messagingSenderId: "124080774626",
+    appId: "1:124080774626:web:f7a453d6c5711d76f1adbb",
+    measurementId: "G-G29QK9X0FK"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var database = firebase.database();
+   // var firebase = require('firebase');
+   var ref = firebase.database().ref('books');
+$("#book-review").click(function(){
+    var bookRef = database.ref('books');
+    var isbn =  $("#book-review").data("isbn");
+
+    bookRef.push({
+        isbn:isbn,
+        review: $("#doReview").val().trim(),
+      });
+    
+
+ ref.on('value', function(snapshot) {
+  $("#comment").html('');
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      var isbn =  $("#book-review").data("isbn")
+      if(childData.isbn == isbn){
+        console.log("in"+childData);
+      $("#comment").append("<div id='"+childData.isbn+"'>"+"</div> <div class='reviews'>"+childData.review+"</div>");
+      } else {
+        console.log("out");
+      }
+    });
+  });
+});
+
+$( document ).ready(function() {
+  ref.on('value', function(snapshot) {
+    $("#comment").html('');
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      var isbn =  $("#book-review").data("isbn");
+      if(childData.isbn == isbn){
+        console.log("in"+childData);
+        
+      $("#comment").append("<div id='"+childData.isbn+"'>"+"</div> <div class='reviews' style='border-bottom: 1px solid; display: inline-block; padding-bottom: 15px; margin-bottom: 20px;'>"+childData.review+"</div>");
+      } else {
+        console.log("out");
+      }
+    });
+  });
+});
+    
+</script>
+
+</body>
+
+</html>
+
+
