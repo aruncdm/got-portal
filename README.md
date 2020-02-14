@@ -14,7 +14,7 @@ in second page. Where users can also add review.
 
 
 ### Built With
-The frameworks that is used to built this project. 
+The frameworks & DB that is used to built this project. 
 
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
