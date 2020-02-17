@@ -92,7 +92,7 @@ $("#book-review").click(function(){
       var isbn =  $("#book-review").data("isbn")
       if(childData.isbn == isbn){
         console.log("in"+childData);
-      $("#comment").append("<div id='"+childData.isbn+"'>"+"</div> <div class='reviews'>"+childData.review+"</div>");
+      $("#comment").append("<div id='"+childData.isbn+"'>"+"</div> <div class='reviews' style='border-bottom: 1px solid; display: inline-block; padding-bottom: 15px; margin-bottom: 20px;'>"+childData.review+"</div>");
       } else {
         console.log("out");
       }
