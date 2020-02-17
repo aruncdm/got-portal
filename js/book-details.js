@@ -2,7 +2,7 @@ $( document ).ready(function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-$.getJSON( urlParams.get('url'), function( data ) {
+$.getJSON( 'https://anapioficeandfire.com/api/books/'+urlParams.get('id'), function( data ) {
     var items = [];
     $("title").html(data['name']);
     $(".book-title").html(data['name']);
